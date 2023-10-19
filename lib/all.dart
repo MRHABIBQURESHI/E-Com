@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:pro/Model/item_model.dart';
+import 'package:pro/data.dart';
+// import 'package:pro/order.dart';
 
 class all extends StatefulWidget {
   const all({super.key});
@@ -8,17 +11,7 @@ class all extends StatefulWidget {
 }
 
 class _allState extends State<all> {
-    List<items> item =[
-items(Name: "Burger", Price: 350, Qty: 4),
-items(Name: "Pizza", Price: 1200, Qty: 2),
-items(Name: "Zinger", Price: 250, Qty: 3),
-items(Name: "Juices", Price: 150, Qty: 5),
-items(Name: "Chips", Price: 50, Qty: 6),
-items(Name: "Tikka", Price: 550, Qty: 47),
-items(Name: "Brost", Price: 650, Qty: 7),
-items(Name: "Nuggest", Price: 450, Qty: 5),
-
-  ];
+   
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -31,7 +24,32 @@ items(Name: "Nuggest", Price: 450, Qty: 5),
 trailing: Row(
   mainAxisSize: MainAxisSize.min,
   children: [
-    IconButton(onPressed: () {}, icon: Icon(Icons.add)),
+    IconButton(onPressed: () {
+      bool isadded = false;
+
+for (var i = 0; i < orders.length; i++) {
+  if (orders[i].id == item[index].id) {
+    orders[i].Qty += 1;
+    isadded = true;
+    break;
+    
+  }
+  
+}
+if (isadded == false) 
+{
+  orders.add(items(
+ id:item[index].id,
+ Name:item[index].Name,
+ Price:item[index].Price,
+ Qty:1,
+  ),);
+  
+}
+
+
+
+    }, icon: Icon(Icons.add)),
     IconButton(onPressed: () {
       setState(() {
         item[index].IsFAv = !(item[index].IsFAv);
@@ -58,19 +76,4 @@ trailing: Row(
     
    
   }
-}
-
-class items {
-  String Name;
-  int Price;
-  int Qty;
-  bool IsFAv;
-
-  items({
- 
- required this.Name,
- required this.Price,
- required this.Qty,
-this.IsFAv = false,
-  });
 }

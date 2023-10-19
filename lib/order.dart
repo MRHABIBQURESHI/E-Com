@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pro/data.dart';
 
 class order extends StatefulWidget {
   const order({super.key});
@@ -8,12 +9,21 @@ class order extends StatefulWidget {
 }
 
 class _orderState extends State<order> {
+   
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Text("Orders"),
+     return ListView.builder(
+      itemCount: orders.length,
+      itemBuilder: (context , index)
+      {
+        return ListTile(
+      title: Text(orders[index].Name),
+      subtitle: Text(
+"Price ${orders[index].Price} || Quantity : ${orders[index].Qty}"
+
       ),
     );
+      }
+      );
   }
 }
